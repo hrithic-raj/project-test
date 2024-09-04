@@ -2,11 +2,12 @@ form{
     display : flex;
     flex-direction : column;
     justify-content: space-evenly;
-    height: 200px;
+    height: 300px !important;
+    box-shadow: 100px 100px 100px 10px solid gray !important;
 }
 form input{
     border-radius: 5px;
-    width: 200px;
+    width: 500px;
     height: 25px;
 }
 form button{

@@ -2,7 +2,8 @@ form{
     display : flex;
     flex-direction : column;
     justify-content: space-evenly;
-    height: 200px;
+    height: 270px !important;
+    box-shadow: 100px 100px 100px 10px solid gray !important;
 }
 form input{
     border-radius: 5px;
