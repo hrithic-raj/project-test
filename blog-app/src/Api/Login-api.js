@@ -2,6 +2,10 @@ import axios from "axios";
 
 const URL="http://localhost:5000/users"
 
+export const checkUsername= async (username)=>{
+    const res = await axios.get(`${URL}?username=${username}`)
+    return res.data.length>0;
+}
 
 
 export const addUser=async (user)=>{

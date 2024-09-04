@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../css/Signup.css'
-import { useNavigate } from 'react-router-dom'
-import { addUser } from '../Api/Login-api'
+import { Link, useNavigate } from 'react-router-dom'
+import { addUser,checkUsername } from '../Api/Login-api'
 
 function Signup() {
     const [name,setName]=useState('')
@@ -10,14 +10,25 @@ function Signup() {
     const [password,setPassword]=useState('')
     const navigate=useNavigate()
     
-    const handleSub=(e)=>{
+    const handleSub=async(e)=>{
         e.preventDefault();
-        addUser({name,username,email,password})
-        setName('')
-        setUsername('')
-        setEmail('')
-        setPassword('')
-        navigate("/login")
+        const isUsername= await checkUsername(username);
+        if(name&&username&&email&&password){
+          if(!isUsername){
+            addUser({name,username,email,password})
+            setName('')
+            setUsername('')
+            setEmail('')
+            setPassword('')
+            navigate("/login")
+          }
+          else{
+            alert(username+"  already exist");
+          }
+        }
+        else{
+          alert("Fill out all the details");
+        }
     }
 
   return (
@@ -28,7 +39,9 @@ function Signup() {
             <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Email'/>
             <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password'/>
             <button type='submit'>Submit</button>
+            <h6>Already have a account <Link to={'/login'}>Login</Link></h6>
         </form>
+        
     </div>
   )
 }
